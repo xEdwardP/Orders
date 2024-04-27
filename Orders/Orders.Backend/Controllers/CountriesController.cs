@@ -22,7 +22,7 @@ namespace Orders.Backend.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
-            return Ok(await _context.Countries.ToListAsync());
+            return Ok(await _context.Countries.AsNoTracking().ToListAsync());
         }
 
         // Metodo para mostrar los registros con condicion

@@ -1,0 +1,28 @@
+﻿@typeparam Titem
+
+@if(MyList == null)
+{
+	@if(Loading is null)
+	{
+		<Loading/>
+	}
+	else
+	{
+		@Loading
+	}
+}
+else if(MyList.Count == 0)
+{
+	@if(NoRecords is null)
+	{
+		<p>NO HAY REGISTROS PARA MOSTRAR</p>
+	}
+	else
+	{
+		@NoRecords
+	}
+}
+else
+{
+	@Body
+}

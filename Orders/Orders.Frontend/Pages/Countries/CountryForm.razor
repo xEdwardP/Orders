@@ -1,0 +1,14 @@
+﻿<NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigationAsync"/>
+
+<EditForm EditContext="editContext" OnValidSubmit="OnValidSubmit">
+	<DataAnnotationsValidator/>
+	<div class="mb-3">
+		<label>Pais:</label>
+		<div>
+			<InputText class="form-control" @bind-Value="@Country.Name"/>
+			<ValidationMessage For="@(() => Country.Name)"/>
+		</div>
+	</div>
+	<button class="btn btn-primary" type="submit">GUARDAR CAMBIOS</button>
+	<button class="btn btn-success" @onclick="ReturnAction">REGRESAR</button>
+</EditForm>
