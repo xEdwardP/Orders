@@ -32,7 +32,7 @@ namespace Orders.Frontend.Pages.Countries
 				Toast = true,
 				Position = SweetAlertPosition.BottomEnd,
 				ShowConfirmButton = true,
-				Timer = 3000
+				Timer = 5000
 			});
 			await toast.FireAsync(icon: SweetAlertIcon.Success, message: "REGISTRO CREADO CON EXITO!");
 		}
