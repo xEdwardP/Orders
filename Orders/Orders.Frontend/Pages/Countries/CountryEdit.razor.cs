@@ -43,7 +43,7 @@ namespace Orders.Frontend.Pages.Countries
             if (responseHttp.Error)
             {
                 var message = await responseHttp.GetErrorMessageAsync();
-				await sweetAlertService.FireAsync("ERROR", message);
+				await sweetAlertService.FireAsync("ERROR", message, SweetAlertIcon.Error);
 				return;
             }
 
