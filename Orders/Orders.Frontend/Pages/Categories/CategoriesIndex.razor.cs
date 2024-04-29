@@ -4,14 +4,14 @@ using Orders.Frontend.Repositories;
 using Orders.Shared.Entities;
 using System.Net;
 
-namespace Orders.Frontend.Pages.Countries
+namespace Orders.Frontend.Pages.Categories
 {
-	public partial class CountriesIndex
+	public partial class CategoriesIndex
 	{
 		[Inject] private IRepository Repository { get; set; } = null!;
 		[Inject] private SweetAlertService SweetAlertService { get; set; } = null!;
 		[Inject] private NavigationManager NavigationManager { get; set; } = null!;
-		public List<Country>? Countries { get; set; }
+		public List<Category>? Categories { get; set; }
 		// Cuando la pagina inicie
 		protected async override Task OnInitializedAsync()
 		{
@@ -20,22 +20,22 @@ namespace Orders.Frontend.Pages.Countries
 
 		private async Task LoadAsync()
 		{
-			var responseHttp = await Repository.GetAsync<List<Country>>("api/countries");
+			var responseHttp = await Repository.GetAsync<List<Category>>("api/categories");
 			if (responseHttp.Error)
 			{
 				var message = await responseHttp.GetErrorMessageAsync();
 				await SweetAlertService.FireAsync("ERROR", message, SweetAlertIcon.Error);
 				return;
 			}
-			Countries = responseHttp.Response;
+			Categories = responseHttp.Response;
 		}
 
-		private async Task DeleteAsync(Country country)
+		private async Task DeleteAsync(Category category)
 		{
 			var result = await SweetAlertService.FireAsync(new SweetAlertOptions
 			{
 				Title = "CONFIRMACION",
-				Text = $"ESTA SEGURO(A) QUE DESEA ELIMINAR DE FORMA PERMANENTE EL PAIS {country.Name}?",
+				Text = $"ESTA SEGURO(A) QUE DESEA ELIMINAR DE FORMA PERMANENTE LA CATEGORIA {category.Name}?",
 				Icon = SweetAlertIcon.Question,
 				ShowCancelButton = true,
 			});
@@ -46,12 +46,12 @@ namespace Orders.Frontend.Pages.Countries
 				return;
 			}
 
-			var responseHttp = await Repository.DeleteAsync<Country>($"api/countries/{country.Id}");
+			var responseHttp = await Repository.DeleteAsync<Category>($"api/categories/{category.Id}");
 			if (responseHttp.Error)
 			{
 				if (responseHttp.HttpResponseMessage.StatusCode == HttpStatusCode.NotFound)
 				{
-					NavigationManager.NavigateTo("/countries");
+					NavigationManager.NavigateTo("/categories");
 				}
 				else
 				{
