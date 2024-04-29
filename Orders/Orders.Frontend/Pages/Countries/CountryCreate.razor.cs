@@ -1,7 +1,7 @@
 ﻿using CurrieTechnologies.Razor.SweetAlert2;
 using Microsoft.AspNetCore.Components;
 using Orders.Frontend.Repositories;
-using Orders.Shared.Entites;
+using Orders.Shared.Entities;
 using System.Reflection.Metadata.Ecma335;
 
 namespace Orders.Frontend.Pages.Countries
