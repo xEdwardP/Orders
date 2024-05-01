@@ -1,12 +1,14 @@
-﻿<NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigationAsync" />
+﻿@typeparam TModel where TModel : IEntityWithName
+
+<NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigationAsync" />
 
 <EditForm EditContext="editContext" OnValidSubmit="OnValidSubmit">
 	<DataAnnotationsValidator />
 	<div class="mb-3">
-		<label>Pais:</label>
+		<label>@TextLabel</label>
 		<div>
-			<InputText class="form-control" @bind-Value="@Country.Name" />
-			<ValidationMessage For="@(() => Country.Name)" />
+			<InputText class="form-control" @bind-Value="@Model.Name" />
+			<ValidationMessage For="@(() => Model.Name)" />
 		</div>
 	</div>
 	<button class="btn btn-primary" type="submit">GUARDAR CAMBIOS</button>

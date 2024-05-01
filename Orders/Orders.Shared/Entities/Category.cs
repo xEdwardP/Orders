@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Orders.Shared.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace Orders.Shared.Entities
 {
-	public class Category
-	{
+	public class Category : IEntityWithName
+    {
 		public int Id { get; set; } // Id del pais
 
 		[Display(Name = "Categoria")] // Nombre del campo que el usuario ve

@@ -35,7 +35,7 @@ namespace Orders.Frontend.Pages.Categories
 			var result = await SweetAlertService.FireAsync(new SweetAlertOptions
 			{
 				Title = "CONFIRMACION",
-				Text = $"ESTA SEGURO(A) QUE DESEA ELIMINAR DE FORMA PERMANENTE LA CATEGORIA {category.Name}?",
+				Text = $"Esta seguro(a) que desea eliminar de forma permanente la categoría {category.Name}?",
 				Icon = SweetAlertIcon.Question,
 				ShowCancelButton = true,
 			});

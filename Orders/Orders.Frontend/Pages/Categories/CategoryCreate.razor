@@ -2,4 +2,4 @@
 
 <h3>Crear Pais</h3>
 
-<CategoryForm @ref="categoryForm" Category="category" OnValidSubmit="CreateAsync" ReturnAction="Return" />
+<FormWithName @ref="categoryForm" Model="category" TextLabel="Categoria:" OnValidSubmit="CreateAsync" ReturnAction="Return" />

@@ -35,7 +35,7 @@ namespace Orders.Frontend.Pages.Countries
 			var result = await SweetAlertService.FireAsync(new SweetAlertOptions
 			{
 				Title = "CONFIRMACION",
-				Text = $"ESTA SEGURO(A) QUE DESEA ELIMINAR DE FORMA PERMANENTE EL PAIS {country.Name}?",
+				Text = $"Esta seguro(a) que desea eliminar de forma permanente el país {country.Name}?",
 				Icon = SweetAlertIcon.Question,
 				ShowCancelButton = true,
 			});
