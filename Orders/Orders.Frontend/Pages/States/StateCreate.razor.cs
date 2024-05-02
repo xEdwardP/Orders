@@ -42,5 +42,6 @@ namespace Orders.Frontend.Pages.States
             stateForm!.FormPostedSuccessfully = true;
             NavigationManager.NavigateTo($"/countries/details/{CountryId}");
         }
+
     }
 }
