@@ -11,6 +11,7 @@
 			<thead>
 				<tr>
 					<th>Pais</th>
+					<th>Departamentos / Estados</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -19,9 +20,11 @@
 				{
 					<tr>
 						<td>@Country.Name</td>
+						<td>@Country.StatesNumber</td>
 						<td>
-							<a href="/countries/edit/@Country.Id" class="btn btn-warning">Editar</a>
-							<button @onclick=@(() => DeleteAsync(Country)) class="btn btn-danger">Borrar</button>
+							<a href="/countries/edit/@Country.Id" class="btn btn-warning btn-sm">Editar</a>
+							<a class="btn btn-info btn-sm" href="/countries/details/@Country.Id">Detalles</a>
+							<button @onclick=@(() => DeleteAsync(Country)) class="btn btn-danger btn-sm">Borrar</button>
 						</td>
 					</tr>
 				}
