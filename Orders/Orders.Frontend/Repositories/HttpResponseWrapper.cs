@@ -29,7 +29,7 @@ namespace Orders.Frontend.Repositories
             var statusCode = HttpResponseMessage.StatusCode;
             if (statusCode == HttpStatusCode.NotFound)
             {
-                return "RECURSO NO ENCONTRADO!";
+                return "¡Recurso no encontrado!";
             }
             if (statusCode == HttpStatusCode.BadRequest)
             {
@@ -37,14 +37,14 @@ namespace Orders.Frontend.Repositories
             }
             if (statusCode == HttpStatusCode.Unauthorized)
             {
-                return "TIENES QUE ESTAR LOGUEADO PARA EJECUTAR ESTA OPERACION!";
+                return "¡Debe iniciar sesión para ejecutar esta operación";
             }
             if (statusCode == HttpStatusCode.Forbidden)
             {
-                return "NO TIENE PERMISOS PARA REALIZAR ESTA OPERACION!";
+                return "¡No tiene permisos para realizar esta operación!";
             }
 
-            return "HA OCURRIDO UN ERROR INESPERADO!";
+            return "¡Ha ocurrido un error inesperado!";
         }
     }
 }

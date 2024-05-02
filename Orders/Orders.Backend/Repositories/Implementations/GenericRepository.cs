@@ -46,8 +46,8 @@ namespace Orders.Backend.Repositories.Implementations
 				return new ActionResponse<T>
 				{
 					WasSuccess = false,
-					Message = "REGISTRO NO ENCONTRADO!"
-				};
+					Message = "¡Registro no encontrado!"
+                };
 			}
 
 			try
@@ -61,8 +61,8 @@ namespace Orders.Backend.Repositories.Implementations
 				return new ActionResponse<T>
 				{
 					WasSuccess = false,
-					Message = "EL REGISTRO NO SE PUEDE ELIMINAR PORQUE TIENE REGISTROS RELACIONADOS!"
-				};
+					Message = "¡El registro no se puede eliminar porque tiene registros relacionados!"
+                };
 			}
 		}
 
@@ -74,8 +74,8 @@ namespace Orders.Backend.Repositories.Implementations
 				return new ActionResponse<T>
 				{
 					WasSuccess = false,
-					Message = "REGISTRO NO ENCONTRADO!"
-				};
+					Message = "¡Registro no encontrado!"
+                };
 			}
 			return new ActionResponse<T>
 			{
@@ -120,8 +120,8 @@ namespace Orders.Backend.Repositories.Implementations
 			return new ActionResponse<T>
 			{
 				WasSuccess = true,
-				Message = "YA EXISTE UN REGISTRO SIMILAR EN LA BASE DE DATOS!"
-			};
+				Message = "¡Ya existe un registro similar en la base de datos!"
+            };
 		}
 
 		private ActionResponse<T> ExceptionActionResponse(Exception exception)

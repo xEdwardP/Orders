@@ -18,6 +18,6 @@ namespace Orders.Shared.Entities
 
 		public ICollection<City>? Cities { get; set; }
 		[Display(Name = "Ciudades")]
-		public int CityNumber => Cities == null || Cities.Count == 0 ? 0 : Cities.Count;
+		public int CitiesNumber => Cities == null || Cities.Count == 0 ? 0 : Cities.Count;
 	}
 }
