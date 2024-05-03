@@ -10,7 +10,7 @@ namespace Orders.Frontend.Pages.States
     public partial class StateEdit
     {
         private State? state;
-        private FormWithName<State>? stateForm; //guarde?
+        private FormWithName<State>? stateForm;
 
         [Inject] private IRepository Repository { get; set; } = null!;
         [Inject] private NavigationManager NavigationManager { get; set; } = null!;
@@ -59,7 +59,7 @@ namespace Orders.Frontend.Pages.States
         {
             stateForm!.FormPostedSuccessfully = true;
             //NavigationManager.NavigateTo($"/countries/details/{state!.CountryId}");
-            NavigationManager.NavigateTo($"/countries/details/{{state!.CountryId}}");
+            NavigationManager.NavigateTo($"/countries/details/{state!.CountryId}");
         }
     }
 }
