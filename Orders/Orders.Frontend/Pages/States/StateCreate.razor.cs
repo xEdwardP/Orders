@@ -23,7 +23,7 @@ namespace Orders.Frontend.Pages.States
             if (responseHttp.Error)
             {
                 var message = await responseHttp.GetErrorMessageAsync();
-                await SweetAlertService.FireAsync("ERROR!", message, SweetAlertIcon.Error);
+                await SweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
                 return;
             }
             Return();
@@ -34,7 +34,7 @@ namespace Orders.Frontend.Pages.States
                 ShowConfirmButton = true,
                 Timer = 3000
             });
-            await toast.FireAsync(icon: SweetAlertIcon.Success, message: "Registro creado con éxito!");
+            await toast.FireAsync(icon: SweetAlertIcon.Success, message: "Registro creado con éxito.");
         }
 
         private void Return()
@@ -42,6 +42,5 @@ namespace Orders.Frontend.Pages.States
             stateForm!.FormPostedSuccessfully = true;
             NavigationManager.NavigateTo($"/countries/details/{CountryId}");
         }
-
     }
 }

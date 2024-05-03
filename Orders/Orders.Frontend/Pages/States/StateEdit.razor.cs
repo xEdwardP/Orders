@@ -1,16 +1,16 @@
-﻿using CurrieTechnologies.Razor.SweetAlert2;
+﻿using System.Net;
+using CurrieTechnologies.Razor.SweetAlert2;
 using Microsoft.AspNetCore.Components;
 using Orders.Frontend.Repositories;
 using Orders.Frontend.Shared;
 using Orders.Shared.Entities;
-using System.Net;
 
 namespace Orders.Frontend.Pages.States
 {
     public partial class StateEdit
     {
         private State? state;
-        private FormWithName<State>? stateForm;
+        private FormWithName<State>? stateForm; //guarde?
 
         [Inject] private IRepository Repository { get; set; } = null!;
         [Inject] private NavigationManager NavigationManager { get; set; } = null!;
@@ -25,6 +25,7 @@ namespace Orders.Frontend.Pages.States
             {
                 if (responseHttp.HttpResponseMessage.StatusCode == HttpStatusCode.NotFound)
                 {
+                    Console.Write(responseHttp);
                     Return();
                 }
                 var message = await responseHttp.GetErrorMessageAsync();
@@ -34,7 +35,7 @@ namespace Orders.Frontend.Pages.States
             state = responseHttp.Response;
         }
 
-        private async Task SaveAsync()
+        private async Task EditAsync()
         {
             var responseHttp = await Repository.PutAsync($"/api/states", state);
             if (responseHttp.Error)
@@ -57,8 +58,8 @@ namespace Orders.Frontend.Pages.States
         private void Return()
         {
             stateForm!.FormPostedSuccessfully = true;
-            NavigationManager.NavigateTo($"/countries/details/{state!.CountryId}");
+            //NavigationManager.NavigateTo($"/countries/details/{state!.CountryId}");
+            NavigationManager.NavigateTo($"/countries/details/{{state!.CountryId}}");
         }
-
     }
 }
