@@ -1,26 +1,25 @@
-﻿using System.Net;
-using CurrieTechnologies.Razor.SweetAlert2;
+﻿using CurrieTechnologies.Razor.SweetAlert2;
 using Microsoft.AspNetCore.Components;
 using Orders.Frontend.Repositories;
 using Orders.Frontend.Shared;
 using Orders.Shared.Entities;
+using System.Net;
 
-namespace Orders.Frontend.Pages.States
+namespace Orders.Frontend.Pages.Cities
 {
-    public partial class StateEdit
+    public partial class CityEdit
     {
-        private State? state;
-        private FormWithName<State>? stateForm;
+        private City? city;
+        private FormWithName<City>? cityForm;
 
+        [EditorRequired, Parameter] public int CityId { get; set; }
         [Inject] private IRepository Repository { get; set; } = null!;
         [Inject] private NavigationManager NavigationManager { get; set; } = null!;
         [Inject] private SweetAlertService SweetAlertService { get; set; } = null!;
 
-        [Parameter] public int StateId { get; set; }
-
         protected override async Task OnParametersSetAsync()
         {
-            var responseHttp = await Repository.GetAsync<State>($"/api/states/{StateId}");
+            var responseHttp = await Repository.GetAsync<City>($"/api/cities/{CityId}");
             if (responseHttp.Error)
             {
                 if (responseHttp.HttpResponseMessage.StatusCode == HttpStatusCode.NotFound)
@@ -28,19 +27,19 @@ namespace Orders.Frontend.Pages.States
                     Return();
                 }
                 var message = await responseHttp.GetErrorMessageAsync();
-                await SweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
+                await SweetAlertService.FireAsync("ERROR!", message, SweetAlertIcon.Error);
                 return;
             }
-            state = responseHttp.Response;
+            city = responseHttp.Response;
         }
 
         private async Task EditAsync()
         {
-            var responseHttp = await Repository.PutAsync($"/api/states", state);
-            if (responseHttp.Error)
+            var response = await Repository.PutAsync($"/api/cities", city);
+            if (response.Error)
             {
-                var message = await responseHttp.GetErrorMessageAsync();
-                await SweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
+                var message = await response.GetErrorMessageAsync();
+                await SweetAlertService.FireAsync("ERROR!", message, SweetAlertIcon.Error);
                 return;
             }
             Return();
@@ -51,13 +50,14 @@ namespace Orders.Frontend.Pages.States
                 ShowConfirmButton = true,
                 Timer = 3000
             });
-            await toast.FireAsync(icon: SweetAlertIcon.Success, message: "Cambios guardados con éxito.");
+            await toast.FireAsync(icon: SweetAlertIcon.Success, message: "Cambios guardados con éxito!");
         }
 
         private void Return()
         {
-            stateForm!.FormPostedSuccessfully = true;
-            NavigationManager.NavigateTo($"/countries/details/{state!.CountryId}");
+            cityForm!.FormPostedSuccessfully = true;
+            NavigationManager.NavigateTo($"/states/details/{city!.StateId}");
         }
+
     }
 }
