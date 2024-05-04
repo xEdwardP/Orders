@@ -1,4 +1,5 @@
-﻿using Orders.Shared.Responses;
+﻿using Orders.Shared.DTOs;
+using Orders.Shared.Responses;
 
 namespace Orders.Backend.Repositories.Interfaces
 {
@@ -8,10 +9,14 @@ namespace Orders.Backend.Repositories.Interfaces
 
 		Task<ActionResponse<IEnumerable<T>>> GetAsync(); // Traer lista de registros
 
-		Task<ActionResponse<T>> AddAsync(T entity); // Agregar registro
+        Task<ActionResponse<IEnumerable<T>>> GetAsync(PaginationDTO pagination); // 
+
+        Task<ActionResponse<int>> GetTotalPagesAsync(PaginationDTO pagination); // Cant Pages
+
+        Task<ActionResponse<T>> AddAsync(T entity); // Agregar registro
 
 		Task<ActionResponse<T>> DeleteAsync(int id); // Eliminar registro
 
 		Task<ActionResponse<T>> UpdateAsync(T entity); // Actualizar registro
-	}
+    }
 }
