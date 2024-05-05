@@ -12,25 +12,57 @@ namespace Orders.Frontend.Pages.Categories
 		[Inject] private SweetAlertService SweetAlertService { get; set; } = null!;
 		[Inject] private NavigationManager NavigationManager { get; set; } = null!;
 		public List<Category>? Categories { get; set; }
-		// Cuando la pagina inicie
-		protected async override Task OnInitializedAsync()
+
+        private int currentPage = 1;
+        private int totalPages;
+
+        protected async override Task OnInitializedAsync()
 		{
 			await LoadAsync();
 		}
 
-		private async Task LoadAsync()
-		{
-			var responseHttp = await Repository.GetAsync<List<Category>>("api/categories");
-			if (responseHttp.Error)
-			{
-				var message = await responseHttp.GetErrorMessageAsync();
-				await SweetAlertService.FireAsync("ERROR", message, SweetAlertIcon.Error);
-				return;
-			}
-			Categories = responseHttp.Response;
-		}
+        private async Task SelectedPageAsync(int page)
+        {
+            currentPage = page;
+            await LoadAsync(page);
+        }
 
-		private async Task DeleteAsync(Category category)
+        private async Task LoadAsync(int page = 1)
+        {
+            var ok = await LoadListAsync(page);
+            if (ok)
+            {
+                await LoadPagesAsync();
+            }
+        }
+
+        private async Task<bool> LoadListAsync(int page)
+        {
+            var responseHttp = await Repository.GetAsync<List<Category>>($"api/categories?page={page}");
+            if (responseHttp.Error)
+            {
+                var message = await responseHttp.GetErrorMessageAsync();
+                await SweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
+                return false;
+            }
+            Categories = responseHttp.Response;
+            return true;
+        }
+
+        private async Task LoadPagesAsync()
+        {
+            var responseHttp = await Repository.GetAsync<int>("api/categories/totalPages");
+            if (responseHttp.Error)
+            {
+                var message = await responseHttp.GetErrorMessageAsync();
+                await SweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
+                return;
+            }
+            totalPages = responseHttp.Response;
+        }
+
+
+        private async Task DeleteAsync(Category category)
 		{
 			var result = await SweetAlertService.FireAsync(new SweetAlertOptions
 			{
