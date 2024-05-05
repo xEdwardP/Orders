@@ -18,22 +18,35 @@ namespace Orders.Backend.Data
 			await CheckCategoriesAsync();
 		}
 
-		// Verifica si existen datos en la tabla de Categories
-		private async Task CheckCategoriesAsync()
-		{
-			if (!_context.Categories.Any())
-			{
-				_context.Categories.Add(new Category { Name = "Categoria 1" });
-				_context.Categories.Add(new Category { Name = "Categoria 2" });
-				_context.Categories.Add(new Category { Name = "Categoria 3" });
-				_context.Categories.Add(new Category { Name = "Categoria 4" });
-				_context.Categories.Add(new Category { Name = "Categoria 5" });
-				await _context.SaveChangesAsync();
-			}
-		}
+        // Verifica si existen datos en la tabla de Categories
+        private async Task CheckCategoriesAsync()
+        {
+            if (!_context.Categories.Any())
+            {
+                _context.Categories.Add(new Category { Name = "Apple" });
+                _context.Categories.Add(new Category { Name = "Autos" });
+                _context.Categories.Add(new Category { Name = "Belleza" });
+                _context.Categories.Add(new Category { Name = "Calzado" });
+                _context.Categories.Add(new Category { Name = "Comida" });
+                _context.Categories.Add(new Category { Name = "Cosmeticos" });
+                _context.Categories.Add(new Category { Name = "Deportes" });
+                _context.Categories.Add(new Category { Name = "Erótica" });
+                _context.Categories.Add(new Category { Name = "Ferreteria" });
+                _context.Categories.Add(new Category { Name = "Gamer" });
+                _context.Categories.Add(new Category { Name = "Hogar" });
+                _context.Categories.Add(new Category { Name = "Jardín" });
+                _context.Categories.Add(new Category { Name = "Jugetes" });
+                _context.Categories.Add(new Category { Name = "Lenceria" });
+                _context.Categories.Add(new Category { Name = "Mascotas" });
+                _context.Categories.Add(new Category { Name = "Nutrición" });
+                _context.Categories.Add(new Category { Name = "Ropa" });
+                _context.Categories.Add(new Category { Name = "Tecnología" });
+                await _context.SaveChangesAsync();
+            }
+        }
 
-		// Verifica si existen datos en la tabla de Countries
-		private async Task CheckCountriesAsync()
+        // Verifica si existen datos en la tabla de Countries
+        private async Task CheckCountriesAsync()
 		{
 			if (!_context.Countries.Any())
 			{
