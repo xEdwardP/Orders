@@ -6,6 +6,8 @@ namespace Orders.Backend.Data
 {
     public class DataContext : IdentityDbContext<User>
 	{
+		// DataContext : IdentityDbContext<User> // Use After
+
 		public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }
