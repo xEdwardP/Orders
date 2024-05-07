@@ -16,7 +16,10 @@ namespace Orders.Frontend.Pages.Categories
         private int currentPage = 1;
         private int totalPages;
 
-        protected async override Task OnInitializedAsync()
+		[Parameter, SupplyParameterFromQuery] public string Page { get; set; } = string.Empty;
+		[Parameter, SupplyParameterFromQuery] public string Filter { get; set; } = string.Empty;
+
+		protected async override Task OnInitializedAsync()
 		{
 			await LoadAsync();
 		}
@@ -29,7 +32,12 @@ namespace Orders.Frontend.Pages.Categories
 
         private async Task LoadAsync(int page = 1)
         {
-            var ok = await LoadListAsync(page);
+			if (!string.IsNullOrWhiteSpace(Page))
+			{
+				page = Convert.ToInt32(Page);
+			}
+
+			var ok = await LoadListAsync(page);
             if (ok)
             {
                 await LoadPagesAsync();
@@ -38,11 +46,17 @@ namespace Orders.Frontend.Pages.Categories
 
         private async Task<bool> LoadListAsync(int page)
         {
-            var responseHttp = await Repository.GetAsync<List<Category>>($"api/categories?page={page}");
+			var url = $"api/categories/?page={page}";
+			if (!string.IsNullOrEmpty(Filter))
+			{
+				url += $"&filter={Filter}";
+			}
+
+			var responseHttp = await Repository.GetAsync<List<Category>>(url);
             if (responseHttp.Error)
             {
                 var message = await responseHttp.GetErrorMessageAsync();
-                await SweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
+                await SweetAlertService.FireAsync("ERROR!", message, SweetAlertIcon.Error);
                 return false;
             }
             Categories = responseHttp.Response;
@@ -51,11 +65,17 @@ namespace Orders.Frontend.Pages.Categories
 
         private async Task LoadPagesAsync()
         {
-            var responseHttp = await Repository.GetAsync<int>("api/categories/totalPages");
+			var url = $"api/categories/totalPages";
+			if (!string.IsNullOrEmpty(Filter))
+			{
+				url += $"?filter={Filter}";
+			}
+
+			var responseHttp = await Repository.GetAsync<int>(url);
             if (responseHttp.Error)
             {
                 var message = await responseHttp.GetErrorMessageAsync();
-                await SweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
+                await SweetAlertService.FireAsync("ERROR!", message, SweetAlertIcon.Error);
                 return;
             }
             totalPages = responseHttp.Response;
@@ -88,7 +108,7 @@ namespace Orders.Frontend.Pages.Categories
 				else
 				{
 					var msgError = await responseHttp.GetErrorMessageAsync();
-					await SweetAlertService.FireAsync("ERROR", msgError, SweetAlertIcon.Error);
+					await SweetAlertService.FireAsync("ERROR!", msgError, SweetAlertIcon.Error);
 				}
 				return;
 			}
@@ -101,7 +121,20 @@ namespace Orders.Frontend.Pages.Categories
 				ShowConfirmButton = true,
 				Timer = 3000
 			});
-			await toast.FireAsync(icon: SweetAlertIcon.Success, message: "REGISTRO ELIMINADO CON EXITO!!");
+			await toast.FireAsync(icon: SweetAlertIcon.Success, message: "REGISTRO ELIMINADO CON EXITO!");
 		}
-	}
+
+        private async Task CleanFilterAsync()
+        {
+            Filter = string.Empty;
+            await ApplyFilterAsync();
+        }
+
+        private async Task ApplyFilterAsync()
+        {
+            int page = 1;
+            await LoadAsync(page);
+            await SelectedPageAsync(page);
+        }
+    }
 }
