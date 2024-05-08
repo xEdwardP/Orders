@@ -1,4 +1,5 @@
 ﻿using CurrieTechnologies.Razor.SweetAlert2;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Orders.Frontend.Repositories;
 using Orders.Frontend.Shared;
@@ -7,7 +8,8 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace Orders.Frontend.Pages.Countries
 {
-	public partial class CountryCreate
+    [Authorize(Roles = "Admin")]
+    public partial class CountryCreate
 	{
 		private Country country = new();
 		private FormWithName<Country>? countryForm;

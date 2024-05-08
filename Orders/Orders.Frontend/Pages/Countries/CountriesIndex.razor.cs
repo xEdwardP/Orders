@@ -1,4 +1,5 @@
 ﻿using CurrieTechnologies.Razor.SweetAlert2;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Orders.Frontend.Repositories;
 using Orders.Shared.Entities;
@@ -6,7 +7,8 @@ using System.Net;
 
 namespace Orders.Frontend.Pages.Countries
 {
-	public partial class CountriesIndex
+    [Authorize(Roles = "Admin")]
+    public partial class CountriesIndex
 	{
 		[Inject] private IRepository Repository { get; set; } = null!;
 		[Inject] private SweetAlertService SweetAlertService { get; set; } = null!;

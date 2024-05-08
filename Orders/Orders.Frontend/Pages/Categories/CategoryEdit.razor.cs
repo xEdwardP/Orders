@@ -1,4 +1,5 @@
 ﻿using CurrieTechnologies.Razor.SweetAlert2;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Orders.Frontend.Repositories;
 using Orders.Frontend.Shared;
@@ -7,7 +8,8 @@ using System.Net;
 
 namespace Orders.Frontend.Pages.Categories
 {
-	public partial class CategoryEdit
+    [Authorize(Roles = "Admin")]
+    public partial class CategoryEdit
 	{
 		private Category? category;
 		private FormWithName<Category>? categoryForm;
