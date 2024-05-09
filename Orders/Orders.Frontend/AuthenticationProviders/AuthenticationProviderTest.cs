@@ -15,7 +15,7 @@ namespace Orders.Frontend.AuthenticationProviders
 			{
 				new Claim("FirstName", "Javier"),
 				new Claim("LastName", "Pineda"),
-				new Claim(ClaimTypes.Name, "jpineda@yopmail.com"),
+				new Claim(ClaimTypes.Name, "epineda@yopmail.com"),
 				new Claim(ClaimTypes.Role, "Admin")
 			},
 			authenticationType: "test");

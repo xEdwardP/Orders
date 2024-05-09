@@ -7,8 +7,8 @@ using Orders.Shared.Entities;
 
 namespace Orders.Backend.Controllers
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     public class CitiesController : GenericController<City>
     {

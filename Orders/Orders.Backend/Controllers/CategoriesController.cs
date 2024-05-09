@@ -7,9 +7,9 @@ using Orders.Shared.Entities;
 
 namespace Orders.Backend.Controllers
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
-	[Route("api/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Route("api/[controller]")]
 	public class CategoriesController : GenericController<Category>
 	{
 		private readonly ICategoriesUnitOfWork _categoriesUnitOfWork;

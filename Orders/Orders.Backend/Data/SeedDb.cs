@@ -21,7 +21,7 @@ namespace Orders.Backend.Data
 			await CheckCountriesAsync();
 			await CheckCategoriesAsync();
 			await CheckRolesAsync();
-			await CheckUserAsync("1010", "Edward", "Pineda", "epineda2022@yopmail.com", "99887766", "Colonia 21", UserType.Admin);
+			await CheckUserAsync("1010", "Edward", "Pineda", "epineda@yopmail.com", "99887766", "Colonia 21", UserType.Admin);
 
 		}
 
