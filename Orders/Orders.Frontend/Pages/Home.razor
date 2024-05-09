@@ -2,13 +2,11 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, Edward!</h1>
-
 <AuthorizeView Roles="Admin">
     <Authorized>
-        <p>Estas autenticado y autorizado, @context.User.Identity?.Name</p>
+        <h3>Estas autenticado y autorizado, @context.User.Identity?.Name</h3>
     </Authorized>
     <NotAuthorized>
-        <p>No estas autenticado</p>
+        <h3>No estas autenticado</h3>
     </NotAuthorized>
 </AuthorizeView>
