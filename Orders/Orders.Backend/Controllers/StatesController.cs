@@ -63,5 +63,12 @@ namespace Orders.Backend.Controllers
 			}
 			return NotFound(response.Message);
 		}
-	}
+
+        [AllowAnonymous]
+        [HttpGet("combo/{countryId:int}")]
+        public async Task<IActionResult> GetComboAsync(int countryId)
+        {
+            return Ok(await _statesUnitOfWork.GetComboAsync(countryId));
+        }
+    }
 }
