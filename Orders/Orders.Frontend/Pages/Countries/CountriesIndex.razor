@@ -1,7 +1,5 @@
 ﻿@page "/countries"
 
-<h3>Paises</h3>
-
 <div class="card">
     <div class="card-header">
         <span>
@@ -30,7 +28,7 @@
                     <thead>
                         <tr>
                             <th>País</th>
-                            <th style="width:300px">Estados / Departamentos</th>
+                            <th style="width:210px">Estados / Departamentos</th>
                             <th style="width:180px"></th>
                         </tr>
                     </thead>
@@ -38,7 +36,7 @@
                         @foreach (var country in Countries!)
                         {
                             <tr>
-                                <td><a style="text-decoration: none; color: black;" href="/countries/details/@country.Id"> @country.Name</a></td>
+                                <td><a style="text-decoration: none" href="/countries/details/@country.Id"> @country.Name</a></td>
                                 <td>@country.StatesNumber</td>
                                 <td>
                                     <a href="/countries/edit/@country.Id" class="btn btn-sm btn-warning"><i class="bi bi-pencil" /> Editar</a>
