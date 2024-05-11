@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Tokens;
 using Orders.Backend.Helpers.ImgHelpers;
@@ -17,26 +19,34 @@ namespace Orders.Backend.Controllers
     {
         private readonly IUsersUnitOfWork _usersUnitOfWork;
         private readonly IConfiguration _configuration;
-        //private readonly IFileStorage _fileStorage;
-        //private readonly string _container;
+        private readonly IFileStorage _fileStorage;
+        private readonly string _container;
 
         public AccountsController(IUsersUnitOfWork usersUnitOfWork, IConfiguration configuration, IFileStorage fileStorage)
         {
             _usersUnitOfWork = usersUnitOfWork;
             _configuration = configuration;
-            //_fileStorage = fileStorage;
-            //_container = "users";
+            _fileStorage = fileStorage;
+            _container = "users";
         }
+
+        [HttpGet]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> GetAsync()
+        {
+            return Ok(await _usersUnitOfWork.GetUserAsync(User.Identity!.Name!));
+        }
+
 
         [HttpPost("CreateUser")]
         public async Task<IActionResult> CreateUser([FromBody] UserDTO model)
         {
             User user = model;
-            //if (!string.IsNullOrEmpty(model.UserPhoto))
-            //{
-            //    var photoUser = Convert.FromBase64String(model.UserPhoto);
-            //    model.UserPhoto = await _fileStorage.SaveFileAsync(photoUser, ".jpg", _container);
-            //}
+            if (!string.IsNullOrEmpty(model.UserPhoto))
+            {
+                var photoUser = Convert.FromBase64String(model.UserPhoto);
+                model.UserPhoto = await _fileStorage.SaveFileAsync(photoUser, ".jpg", _container);
+            }
             var result = await _usersUnitOfWork.AddUserAsync(user, model.Password);
             if (result.Succeeded)
             {
@@ -60,6 +70,45 @@ namespace Orders.Backend.Controllers
             return BadRequest("Email y/o contraseña incorrectos!");
         }
 
+        [HttpPut]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> PutAsync(User user)
+        {
+            try
+            {
+                var currentUser = await _usersUnitOfWork.GetUserAsync(User.Identity!.Name!);
+                if (currentUser == null)
+                {
+                    return NotFound();
+                }
+
+                if (!string.IsNullOrEmpty(user.UserPhoto))
+                {
+                    var photoUser = Convert.FromBase64String(user.UserPhoto);
+                    user.UserPhoto = await _fileStorage.SaveFileAsync(photoUser, ".jpg", _container);
+                }
+
+                currentUser.Document = user.Document;
+                currentUser.FirstName = user.FirstName;
+                currentUser.LastName = user.LastName;
+                currentUser.Address = user.Address;
+                currentUser.PhoneNumber = user.PhoneNumber;
+                currentUser.UserPhoto = !string.IsNullOrEmpty(user.UserPhoto) && user.UserPhoto != currentUser.UserPhoto ? user.UserPhoto : currentUser.UserPhoto;
+                currentUser.CityId = user.CityId;
+
+                var result = await _usersUnitOfWork.UpdateUserAsync(currentUser);
+                if (result.Succeeded)
+                {
+                    return NoContent();
+                }
+
+                return BadRequest(result.Errors.FirstOrDefault());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         private TokenDTO BuildToken(User user)
         {
             var claims = new List<Claim>
