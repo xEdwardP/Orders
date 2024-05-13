@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text;
 using System.Text.Json;
 
 namespace Orders.Frontend.Repositories
@@ -91,5 +92,11 @@ namespace Orders.Frontend.Repositories
 			var response = await responseHttp.Content.ReadAsStringAsync();
 			return JsonSerializer.Deserialize<T>(response, _jsonDefaultOptions)!;
 		}
-	}
+
+        public async Task<HttpResponseWrapper<object>> GetAsync(string url)
+        {
+            var responseHttp = await _httpClient.GetAsync(url);
+			return new HttpResponseWrapper<object>(null, !responseHttp.IsSuccessStatusCode, responseHttp);
+        }
+    }
 }

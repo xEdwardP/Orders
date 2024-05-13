@@ -13,5 +13,7 @@
 		Task<HttpResponseWrapper<object>> PutAsync<T>(string url, T model); // Put -> Actualizar sin retorno
 
 		Task<HttpResponseWrapper<TActionResponse>> PutAsync<T, TActionResponse>(string url, T model); // Put -> Actualizar con retorno
+
+        Task<HttpResponseWrapper<object>> GetAsync(string url);
 	}
 }
