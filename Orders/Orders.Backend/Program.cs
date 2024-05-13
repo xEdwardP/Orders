@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Orders.Backend.Data;
 using Orders.Backend.Helpers.ImgHelpers;
+using Orders.Backend.Helpers.MailHelper;
 using Orders.Backend.Repositories.Implementations;
 using Orders.Backend.Repositories.Interfaces;
 using Orders.Backend.UnitsOfWork.Implementations;
@@ -61,9 +62,9 @@ builder.Services.AddTransient<SeedDb>();
 // Injection
 builder.Services.AddScoped(typeof(IGenericUnitOfWork<>), typeof(GenericUnitOfWork<>));
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-// Images in Blob
-builder.Services.AddScoped<IFileStorage, FileStorage>();
-
+// Injection of Helpers
+builder.Services.AddScoped<IFileStorage, FileStorage>(); // Azure Blob
+builder.Services.AddScoped<IMailHelper, MailHelper>(); //Emails
 // Injections of Repository
 builder.Services.AddScoped<ICategoriesRepository, CategoriesRepository>();
 builder.Services.AddScoped<ICitiesRepository, CitiesRepository>();
@@ -79,8 +80,8 @@ builder.Services.AddScoped<IUsersUnitOfWork, UsersUnitOfWork>();
 
 builder.Services.AddIdentity<User, IdentityRole>(x =>
 {
-    //x.Tokens.AuthenticatorTokenProvider = TokenOptions.DefaultAuthenticatorProvider;
-    //x.SignIn.RequireConfirmedEmail = true;
+    x.Tokens.AuthenticatorTokenProvider = TokenOptions.DefaultAuthenticatorProvider;
+    x.SignIn.RequireConfirmedEmail = true;
     x.User.RequireUniqueEmail = true;
 	x.Password.RequireDigit = false;
 	x.Password.RequiredUniqueChars = 0;
@@ -88,9 +89,9 @@ builder.Services.AddIdentity<User, IdentityRole>(x =>
 	x.Password.RequireNonAlphanumeric = false;
 	x.Password.RequireUppercase = false;
 	x.Password.RequiredLength = 6;
-    //x.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-    //x.Lockout.MaxFailedAccessAttempts = 3;
-    //x.Lockout.AllowedForNewUsers = true;
+    x.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+    x.Lockout.MaxFailedAccessAttempts = 3;
+    x.Lockout.AllowedForNewUsers = true;
 })
 	.AddEntityFrameworkStores<DataContext>()
 	.AddDefaultTokenProviders();
