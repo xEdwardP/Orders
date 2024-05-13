@@ -1,4 +1,5 @@
 using CurrieTechnologies.Razor.SweetAlert2;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Orders.Frontend.Repositories;
 using Orders.Frontend.Services;
@@ -7,6 +8,8 @@ using System.Net;
 
 namespace Orders.Frontend.Pages.Auth
 {
+    //[Authorize(Roles = "Admin")]
+    [Authorize]
     public partial class EditUser
     {
         private User? user;
@@ -100,6 +103,16 @@ namespace Orders.Frontend.Pages.Auth
             }
 
             NavigationManager.NavigateTo("/");
+
+            var toast = SweetAlertService.Mixin(new SweetAlertOptions
+            {
+                Toast = true,
+                Position = SweetAlertPosition.BottomEnd,
+                ShowConfirmButton = true,
+                Timer = 3000
+            });
+
+            await toast.FireAsync(icon: SweetAlertIcon.Success, message: "Cambios aplicados con éxito");
         }
 
         private async Task CountryChangedAsync(ChangeEventArgs e)
