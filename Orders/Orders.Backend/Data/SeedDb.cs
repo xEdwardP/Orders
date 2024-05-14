@@ -34,10 +34,10 @@ namespace Orders.Backend.Data
 
 		private async Task<User> CheckUserAsync(string document, string firstName, string lastName, string email, string phone, string address, UserType userType)
 		{
-            //var city = await _context.Cities.FirstOrDefaultAsync(x => x.Name == "Medellín");
-            //city ??= await _context.Cities.FirstOrDefaultAsync();
+			var city = await _context.Cities.FirstOrDefaultAsync(x => x.Name == "Sa");
+			city ??= await _context.Cities.FirstOrDefaultAsync();
 
-            var user = await _usersUnitOfWork.GetUserAsync(email);
+			var user = await _usersUnitOfWork.GetUserAsync(email);
 			if (user == null)
 			{
 				user = new User
