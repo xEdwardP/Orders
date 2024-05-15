@@ -148,14 +148,14 @@ namespace Orders.Frontend.Pages.Countries
             await toast.FireAsync(icon: SweetAlertIcon.Success, message: "Registro borrado con éxito!");
         }
 
-        private async Task CleanFilterAsync()
+        private async Task FilterCallBack(string filter)
         {
-            Filter = string.Empty;
+            Filter = filter;
             await ApplyFilterAsync();
+            StateHasChanged();
+        }
 
-		}
-
-		private async Task ApplyFilterAsync()
+        private async Task ApplyFilterAsync()
 		{
             int page = 1;
             await LoadAsync(page);
