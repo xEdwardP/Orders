@@ -22,6 +22,7 @@ namespace Orders.Frontend.Pages.Countries
 
 		[Parameter, SupplyParameterFromQuery] public string Page { get; set; } = string.Empty;
 		[Parameter, SupplyParameterFromQuery] public string Filter {  get; set; } = string.Empty;
+		[Parameter, SupplyParameterFromQuery] public int RecordsNumber { get; set; } = 10;
 
         protected override async Task OnInitializedAsync()
         {
@@ -54,7 +55,9 @@ namespace Orders.Frontend.Pages.Countries
 
         private async Task LoadPagesAsync()
         {
-			var url = $"api/states/totalPages?id={CountryId}";
+            ValidateRecordsNumber(RecordsNumber);
+            var url = $"api/states/totalPages?id={CountryId}&recordsnumber={RecordsNumber}";
+
 			if (!string.IsNullOrEmpty(Filter))
 			{
 				url += $"&filter={Filter}";
@@ -72,7 +75,9 @@ namespace Orders.Frontend.Pages.Countries
 
         private async Task<bool> LoadStatesAsync(int page)
         {
-            var url = $"api/states?id={CountryId}&page={page}";
+            ValidateRecordsNumber(RecordsNumber);
+            var url = $"api/states?id={CountryId}&page={page}&recordsnumber={RecordsNumber}";
+
             if (!string.IsNullOrEmpty(Filter))
             {
                 url += $"&filter={Filter}";
@@ -161,5 +166,21 @@ namespace Orders.Frontend.Pages.Countries
             await LoadAsync(page);
             await SelectedPageAsync(page);
 		}
-	}
+
+        private async Task SelectedRecordsNumberAsync(int recordsNumber)
+        {
+            RecordsNumber = recordsNumber;
+            int page = 1;
+            await LoadAsync(page);
+            await SelectedPageAsync(page);
+        }
+
+        private void ValidateRecordsNumber(int recordsNumber)
+        {
+            if(recordsNumber == 0)
+            {
+                RecordsNumber = 10;
+            }
+        }
+    }
 }

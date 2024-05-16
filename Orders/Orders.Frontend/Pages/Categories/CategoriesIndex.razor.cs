@@ -20,8 +20,9 @@ namespace Orders.Frontend.Pages.Categories
 
 		[Parameter, SupplyParameterFromQuery] public string Page { get; set; } = string.Empty;
 		[Parameter, SupplyParameterFromQuery] public string Filter { get; set; } = string.Empty;
+        [Parameter, SupplyParameterFromQuery] public int RecordsNumber { get; set; } = 10;
 
-		protected async override Task OnInitializedAsync()
+        protected async override Task OnInitializedAsync()
 		{
 			await LoadAsync();
 		}
@@ -48,8 +49,10 @@ namespace Orders.Frontend.Pages.Categories
 
         private async Task<bool> LoadListAsync(int page)
         {
-			var url = $"api/categories/?page={page}";
-			if (!string.IsNullOrEmpty(Filter))
+            ValidateRecordsNumber(RecordsNumber);
+            var url = $"api/categories?page={page}&recordsnumber={RecordsNumber}";
+
+            if (!string.IsNullOrEmpty(Filter))
 			{
 				url += $"&filter={Filter}";
 			}
@@ -67,8 +70,10 @@ namespace Orders.Frontend.Pages.Categories
 
         private async Task LoadPagesAsync()
         {
-			var url = $"api/categories/totalPages";
-			if (!string.IsNullOrEmpty(Filter))
+            ValidateRecordsNumber(RecordsNumber);
+            var url = $"api/categories/totalPages?recordsnumber={RecordsNumber}";
+
+            if (!string.IsNullOrEmpty(Filter))
 			{
 				url += $"?filter={Filter}";
 			}
@@ -138,6 +143,22 @@ namespace Orders.Frontend.Pages.Categories
             Filter = filter;
             await ApplyFilterAsync();
             StateHasChanged();
+        }
+
+        private async Task SelectedRecordsNumberAsync(int recordsnumber)
+        {
+            RecordsNumber = recordsnumber;
+            int page = 1;
+            await LoadAsync(page);
+            await SelectedPageAsync(page);
+        }
+
+        private void ValidateRecordsNumber(int recordsnumber)
+        {
+            if (recordsnumber == 0)
+            {
+                RecordsNumber = 10;
+            }
         }
     }
 }
