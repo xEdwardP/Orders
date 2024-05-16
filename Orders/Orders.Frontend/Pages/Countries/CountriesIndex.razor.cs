@@ -20,12 +20,21 @@ namespace Orders.Frontend.Pages.Countries
 
 		[Parameter, SupplyParameterFromQuery] public string Page { get; set; } = string.Empty;
 		[Parameter, SupplyParameterFromQuery] public string Filter { get; set; } = string.Empty;
+        [Parameter, SupplyParameterFromQuery] public int RecordsNumber { get; set; } = 10;
 
-		// Cuando la pagina inicie
-		protected async override Task OnInitializedAsync()
+        // Cuando la pagina inicie
+        protected async override Task OnInitializedAsync()
 		{
 			await LoadAsync();
 		}
+
+        private async Task SelectedRecordsNumberAsync(int recordsnumber)
+        {
+            RecordsNumber = recordsnumber;
+            int page = 1;
+            await LoadAsync(page);
+            await SelectedPageAsync(page);
+        }
 
         private async Task SelectedPageAsync(int page)
         {
@@ -49,7 +58,9 @@ namespace Orders.Frontend.Pages.Countries
 
         private async Task<bool> LoadListAsync(int page)
         {
-			var url = $"api/countries?page={page}";
+            ValidateRecordsNumber(RecordsNumber);
+            var url = $"api/countries?page={page}&recordsnumber={RecordsNumber}";
+
 			if (!string.IsNullOrEmpty(Filter))
 			{
 				url += $"&filter={Filter}";
@@ -68,8 +79,9 @@ namespace Orders.Frontend.Pages.Countries
 
         private async Task LoadPagesAsync()
         {
-			var url = "api/countries/totalPages";
-			if (!string.IsNullOrEmpty(Filter))
+            ValidateRecordsNumber(RecordsNumber);
+            var url = $"api/countries/totalPages?recordsnumber={RecordsNumber}";
+            if (!string.IsNullOrEmpty(Filter))
 			{
 				url += $"?filter={Filter}";
 			}
@@ -138,6 +150,14 @@ namespace Orders.Frontend.Pages.Countries
             Filter = filter;
             await ApplyFilterAsync();
             StateHasChanged();
+        }
+
+        private void ValidateRecordsNumber(int recordsnumber)
+        {
+            if (recordsnumber == 0)
+            {
+                RecordsNumber = 10;
+            }
         }
     }
 }
