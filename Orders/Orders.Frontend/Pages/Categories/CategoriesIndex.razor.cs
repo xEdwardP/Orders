@@ -15,6 +15,7 @@ namespace Orders.Frontend.Pages.Categories
 		[Inject] private IRepository Repository { get; set; } = null!;
 		[Inject] private SweetAlertService SweetAlertService { get; set; } = null!;
 		[Inject] private NavigationManager NavigationManager { get; set; } = null!;
+
 		public List<Category>? Categories { get; set; }
 
         private int currentPage = 1;
@@ -98,7 +99,7 @@ namespace Orders.Frontend.Pages.Categories
 
             if (!string.IsNullOrEmpty(Filter))
 			{
-				url += $"?filter={Filter}";
+				url += $"&filter={Filter}";
 			}
 
 			var responseHttp = await Repository.GetAsync<int>(url);

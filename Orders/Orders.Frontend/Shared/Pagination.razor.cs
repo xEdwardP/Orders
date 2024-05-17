@@ -97,6 +97,7 @@ namespace Orders.Frontend.Shared
 
         private class PageModel
         {
+            public bool Active { get; set; } = false;
             public string Text { get; set; } = null!;
             public int Page { get; set; }
             public bool Enable { get; set; }
