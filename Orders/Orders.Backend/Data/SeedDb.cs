@@ -26,7 +26,8 @@ namespace Orders.Backend.Data
             await CheckCountriesAsync();
 			await CheckCategoriesAsync();
 			await CheckRolesAsync();
-			await CheckUserAsync("1010", "Edward", "Pineda", "epineda@yopmail.com", "99887766", "Jude.jpg", "Colonia 21", UserType.Admin);
+            await CheckProductsAsync();
+            await CheckUserAsync("1010", "Edward", "Pineda", "epineda@yopmail.com", "99887766", "Calle Luna Calle Sol", "Jude.jpg", UserType.Admin);
             await CheckUserAsync("0002", "Ledys", "Bedoya", "ledys@yopmail.com", "322 311 4620", "Calle Luna Calle Sol", "LedysBedoya.jpg", UserType.User);
             await CheckUserAsync("0003", "Brad", "Pitt", "brad@yopmail.com", "322 311 4620", "Calle Luna Calle Sol", "Brad.jpg", UserType.User);
             await CheckUserAsync("0004", "Angelina", "Jolie", "angelina@yopmail.com", "322 311 4620", "Calle Luna Calle Sol", "Angelina.jpg", UserType.User);
