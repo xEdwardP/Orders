@@ -39,6 +39,8 @@ namespace Orders.Backend.Data
             await CheckUserAsync("0010", "Otep", "Shamaya", "otep@yopmail.com", "322 311 4620", "Calle Luna Calle Sol", "otep.jpg", UserType.User);
             await CheckUserAsync("0011", "Ozzy", "Osbourne", "ozzy@yopmail.com", "322 311 4620", "Calle Luna Calle Sol", "ozzy.jpg", UserType.User);
             await CheckUserAsync("0012", "Selena", "Quintanilla", "selenba@yopmail.com", "322 311 4620", "Calle Luna Calle Sol", "selena.jpg", UserType.User);
+
+            Console.WriteLine("Seeder Finalizado!");
         }
 
         private async Task CheckProductsAsync()
@@ -260,6 +262,5 @@ namespace Orders.Backend.Data
 
 			await _context.SaveChangesAsync();
 		}
-
 	}
 }
