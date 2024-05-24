@@ -33,7 +33,7 @@ namespace Orders.Frontend.Pages.Products
             if (httpActionResponse.Error)
             {
                 var message = await httpActionResponse.GetErrorMessageAsync();
-                await SweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
+                await SweetAlertService.FireAsync("ERROR!", message, SweetAlertIcon.Error);
                 return;
             }
 
@@ -47,7 +47,7 @@ namespace Orders.Frontend.Pages.Products
             if (httpActionResponse.Error)
             {
                 var message = await httpActionResponse.GetErrorMessageAsync();
-                await SweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
+                await SweetAlertService.FireAsync("ERROR!", message, SweetAlertIcon.Error);
                 return;
             }
 
