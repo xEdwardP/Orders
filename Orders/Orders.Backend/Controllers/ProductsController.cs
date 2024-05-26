@@ -19,6 +19,7 @@ namespace Orders.Backend.Controllers
             _productsUnitOfWork = productsUnitOfWork;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public override async Task<IActionResult> GetAsync([FromQuery] PaginationDTO pagination)
         {
@@ -30,6 +31,7 @@ namespace Orders.Backend.Controllers
             return BadRequest();
         }
 
+        [AllowAnonymous]
         [HttpGet("totalPages")]
         public override async Task<IActionResult> GetPagesAsync([FromQuery] PaginationDTO pagination)
         {
@@ -41,6 +43,7 @@ namespace Orders.Backend.Controllers
             return BadRequest();
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public override async Task<IActionResult> GetAsync(int id)
         {
@@ -94,6 +97,17 @@ namespace Orders.Backend.Controllers
                 return Ok(action.Result);
             }
             return NotFound(action.Message);
+        }
+
+        [HttpDelete("{id}")]
+        public override async Task<IActionResult> DeleteAsync(int id)
+        {
+            var action = await _productsUnitOfWork.DeleteAsync(id);
+            if (!action.WasSuccess)
+            {
+                return NotFound();
+            }
+            return NoContent();
         }
     }
 }

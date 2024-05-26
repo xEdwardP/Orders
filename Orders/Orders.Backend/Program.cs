@@ -118,10 +118,17 @@ void SeedData(WebApplication app)
 {
     var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
 
-    using (var scope = scopedFactory!.CreateScope())
+    try
     {
-        var service = scope.ServiceProvider.GetService<SeedDb>();
-        service!.SeedAsync().Wait();
+        using (var scope = scopedFactory!.CreateScope())
+        {
+            var service = scope.ServiceProvider.GetService<SeedDb>();
+            service!.SeedAsync().Wait();
+        }
+    }
+    catch(Exception ex)
+    {
+        Console.Write(ex);
     }
 }
 

@@ -11,6 +11,7 @@ namespace Orders.Frontend.Shared
         [Parameter] public int CurrentPage { get; set; } = 1; // Initial Page
         [Parameter] public int TotalPages { get; set; } = 1;
         [Parameter] public int Radio { get; set; } = 10; // Cant max bottons pages
+        [Parameter] public bool IsHome { get; set; } = false;
         [Parameter] public EventCallback<int> SelectedPage { get; set; }
         [Parameter] public EventCallback<int> RecordsNumber { get; set; }
 
@@ -62,13 +63,27 @@ namespace Orders.Frontend.Shared
 
         private void BuildOptions()
         {
-            options =
+            if (IsHome)
+            {
+                //
+                options =
+                    [
+                    new OptionModel { Value = 8, Name = "8" },
+                    new OptionModel { Value = 16, Name = "16" },
+                    new OptionModel { Value = 32, Name = "32" },
+                    new OptionModel { Value = int.MaxValue, Name = "Todos" },
+                    ];
+            }
+            else
+            {
+                options =
                 [
                 new OptionModel { Value = 10, Name = "10" },
                 new OptionModel { Value = 25, Name = "25" },
                 new OptionModel { Value = 50, Name = "50" },
                 new OptionModel { Value = int.MaxValue, Name = "Todos" },
                 ];
+            }
         }
 
         private async Task InternalRecordsNumberSelected(ChangeEventArgs e)
