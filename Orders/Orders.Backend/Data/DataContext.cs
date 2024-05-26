@@ -19,6 +19,7 @@ namespace Orders.Backend.Data
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<State> States { get; set; }
+        public DbSet<TemporalOrder> TemporalOrders { get; set; }
 
         // Indices -> Para que no se repitan nombres
         protected override void OnModelCreating(ModelBuilder modelBuilder)
