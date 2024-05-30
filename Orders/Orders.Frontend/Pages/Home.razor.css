@@ -8,3 +8,9 @@
     font-family: sans-serif;
     margin: 5px;
 }
+
+.upControls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
