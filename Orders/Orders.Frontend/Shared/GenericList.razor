@@ -1,6 +1,6 @@
 ﻿@typeparam Titem
 
-@if(MyList == null)
+@if(MyList is null)
 {
 	@if(Loading is null)
 	{
@@ -15,7 +15,7 @@ else if(MyList.Count == 0)
 {
 	@if(NoRecords is null)
 	{
-		<p>NO HAY REGISTROS PARA MOSTRAR</p>
+		<p>NO HAY REGISTROS PARA MOSTRAR...</p>
 	}
 	else
 	{
