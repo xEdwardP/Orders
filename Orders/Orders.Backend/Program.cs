@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 using Orders.Backend.Data;
 using Orders.Backend.Helpers.ImgHelpers;
 using Orders.Backend.Helpers.MailHelper;
+using Orders.Backend.Helpers.Orders;
 using Orders.Backend.Repositories.Implementations;
 using Orders.Backend.Repositories.Interfaces;
 using Orders.Backend.UnitsOfWork.Implementations;
@@ -65,10 +66,12 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
 // Injection of Helpers
 builder.Services.AddScoped<IFileStorage, FileStorage>(); // Azure Blob
 builder.Services.AddScoped<IMailHelper, MailHelper>(); //Emails
+builder.Services.AddScoped<IOrdersHelper, OrdersHelper>();
 // Injections of Repository
 builder.Services.AddScoped<ICategoriesRepository, CategoriesRepository>();
 builder.Services.AddScoped<ICitiesRepository, CitiesRepository>();
 builder.Services.AddScoped<ICountriesRepository, CountriesRepository>();
+builder.Services.AddScoped<IOrdersRepository, OrdersRepository>();
 builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
 builder.Services.AddScoped<IStatesRepository, StatesRepository>();
 builder.Services.AddScoped<ITemporalOrdersRepository, TemporalOrdersRepository>();
@@ -77,6 +80,7 @@ builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 builder.Services.AddScoped<ICategoriesUnitOfWork, CategoriesUnitOfWork>();
 builder.Services.AddScoped<ICitiesUnitOfWork, CitiesUnitOfWork>();
 builder.Services.AddScoped<ICountriesUnitOfWork, CountriesUnitOfWork>();
+builder.Services.AddScoped<IOrdersUnitOfWork, OrdersUnitOfWork>();
 builder.Services.AddScoped<IProductsUnitOfWork, ProductsUnitOfWork>();
 builder.Services.AddScoped<IStatesUnitOfWork, StatesUnitOfWork>();
 builder.Services.AddScoped<ITemporalOrdersUnitOfWork, TemporalOrdersUnitOfWork>();
