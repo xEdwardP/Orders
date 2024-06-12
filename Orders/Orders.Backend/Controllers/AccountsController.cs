@@ -5,6 +5,7 @@ using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Tokens;
 using Orders.Backend.Helpers.ImgHelpers;
 using Orders.Backend.Helpers.MailHelper;
+using Orders.Backend.Repositories.Interfaces;
 using Orders.Backend.UnitsOfWork.Interfaces;
 using Orders.Shared.DTOs;
 using Orders.Shared.Entities;
@@ -23,14 +24,16 @@ namespace Orders.Backend.Controllers
         private readonly IConfiguration _configuration;
         private readonly IFileStorage _fileStorage;
         private readonly IMailHelper _mailHelper;
+        private readonly IUsersRepository _usersRepository;
         private readonly string _container;
 
-        public AccountsController(IUsersUnitOfWork usersUnitOfWork, IConfiguration configuration, IFileStorage fileStorage, IMailHelper mailHelper)
+        public AccountsController(IUsersUnitOfWork usersUnitOfWork, IConfiguration configuration, IFileStorage fileStorage, IMailHelper mailHelper, IUsersRepository usersRepository)
         {
             _usersUnitOfWork = usersUnitOfWork;
             _configuration = configuration;
             _fileStorage = fileStorage;
             _mailHelper = mailHelper;
+            _usersRepository = usersRepository;
             _container = "users";
         }
 
@@ -285,5 +288,28 @@ namespace Orders.Backend.Controllers
                 Expiration = expiration
             };
         }
+
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAsync([FromQuery] PaginationDTO pagination)
+        {
+            var response = await _usersRepository.GetAsync(pagination);
+            if (response.WasSuccess)
+            {
+                return Ok(response.Result);
+            }
+            return BadRequest();
+        }
+
+        [HttpGet("totalPages")]
+        public async Task<IActionResult> GetPagesAsync([FromQuery] PaginationDTO pagination)
+        {
+            var action = await _usersRepository.GetTotalPagesAsync(pagination);
+            if (action.WasSuccess)
+            {
+                return Ok(action.Result);
+            }
+            return BadRequest();
+        }
+
     }
 }
