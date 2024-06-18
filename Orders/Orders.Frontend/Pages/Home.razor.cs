@@ -15,7 +15,7 @@ namespace Orders.Frontend.Pages
 		private int totalPages;
 		private int counter = 0;
 		private bool isAuthenticated;
-		//private string allCategories = "all_categories_list";
+		private string allCategories = "all_categories_list";
 
 		public List<Product>? Products { get; set; }
 		public List<Category>? Categories { get; set; }
@@ -101,17 +101,17 @@ namespace Orders.Frontend.Pages
 
 		private async Task LoadAsync(int page = 1, string category = "")
 		{
-			//if (!string.IsNullOrWhiteSpace(category))
-			//{
-			//	if (category == allCategories)
-			//	{
-			//		CategoryFilter = string.Empty;
-			//	}
-			//	else
-			//	{
-			//		CategoryFilter = category;
-			//	}
-			//}
+			if (!string.IsNullOrWhiteSpace(category))
+			{
+				if (category == allCategories)
+				{
+					CategoryFilter = string.Empty;
+				}
+				else
+				{
+					CategoryFilter = category;
+				}
+			}
 
 			if (!string.IsNullOrWhiteSpace(Page))
 			{

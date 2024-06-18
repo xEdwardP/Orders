@@ -6,7 +6,7 @@
 }
 else
 {
-@*     if (Categories != null)
+    if (Categories != null)
     {
         <div class="d-flex flex-wrap justify-content-center  mb-4 mt-2">
             @foreach (var category in Categories)
@@ -15,7 +15,7 @@ else
             }
             <a class="btn btn-link" style="cursor: pointer" @onclick=@(() => LoadAsync(1, allCategories))>Todos</a>
         </div>
-    } *@
+    }
 
 @*     <div class="d-flex align-items-center justify-content-between">
         <GenericFilter PlaceHolder="Buscar producto..." Callback=@FilterCallBack />
