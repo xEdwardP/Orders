@@ -51,38 +51,38 @@ namespace Orders.Backend.Data
         {
             if (!_context.Products.Any())
             {
-                await AddProductAsync("Desayunos / Cenas", 90, 100F, new List<string>() { "Tipico", "Economico" }, new List<string>() { "pollofp.jpeg" });
-                await AddProductAsync("Pollo Frito con papas", 140, 100F, new List<string>() { "Tipico", "Pollo", "Carnes" }, new List<string>() { "doc.jpeg" });
+                await AddProductAsync("Desayunos / Cenas", 90, 100F, new List<string>() { "Tipico", "Economico" }, new List<string>() { "doc.jpeg" });
+                await AddProductAsync("Pollo Frito con papas", 140, 100F, new List<string>() { "Tipico", "Pollo", "Carnes" }, new List<string>() { "pollofp.jpeg" });
                 await AddProductAsync("Pollo Frito con tajadas", 130, 100F, new List<string>() { "Tipico", "Pollo", "Carnes" }, new List<string>() { "polloft.jpeg" });
                 await AddProductAsync("Plato mixto", 180, 100F, new List<string>() { "Carnes" }, new List<string>() { "plato_mixto.jpeg" });
                 await AddProductAsync("Pincho mixto", 170, 100F, new List<string>() { "Carnes" }, new List<string>() { "pincho_mixto.jpeg" });
                 await AddProductAsync("Platano Frito", 50, 100F, new List<string>() { "Tipico", "Economico" }, new List<string>() { "platano_mixto.jpeg" });
-                await AddProductAsync("Tortillas con quesillo", 50, 100F, new List<string>() { "Tipico", "Economico" }, new List<string>() { "tortillas_quesillo.jpeg" });
-
+                await AddProductAsync("Tortillas con quesillo", 50, 100F, new List<string>() { "Tipico", "Economico" }, new List<string>() { "tortillas_quesillo.jpeg" });           
                 await AddProductAsync("Torta tica con papas", 110, 100F, new List<string>() { "Extranjero", "Carnes" }, new List<string>() { "tortatp.jpeg" });
                 await AddProductAsync("Taco Mexicano", 100, 100F, new List<string>() { "Extranjero" }, new List<string>() { "taco_mexicano.jpeg" });
-
-
-                await AddProductAsync("Pupusas Mixtas", 50, 100F, new List<string>() { "Tipico", "Economico" }, new List<string>() { "taco_mexicano.jpeg" });
+                await AddProductAsync("Pupusas Mixtas", 50, 100F, new List<string>() { "Tipico", "Economico" }, new List<string>() { "pupusas_mixta.jpeg" });
                 await AddProductAsync("Baleadas", 15, 100F, new List<string>() { "Tipico", "Economico" }, new List<string>() { "baleadas.jpeg" });
-                //await AddProductAsync("Bolibaleadas", 25, 100F, new List<string>() { "Tipico", "Economico" }, new List<string>() { "bolibaleadas.jpeg" });
-                //await AddProductAsync("Hamburguesa de pollo", 160, 100F, new List<string>() { "Pollo", "Comida Rapida", "Carnes" }, new List<string>() { "hpollo.jpeg" });
-                //await AddProductAsync("Hamburguesa con papas", 140, 100F, new List<string>() { "Carnes", "Comida Rapida" }, new List<string>() { "hpp.jpeg" });
-                //await AddProductAsync("Hamburguesa doble carne", 170, 100F, new List<string>() { "Tipico", "Comida Rapida", "Carnes" }, new List<string>() { "hdc.jpeg" });
-                //await AddProductAsync("Pan Sandwich", 120, 100F, new List<string>() { "Emparedados", "Carnes" }, new List<string>() { "pans.jpeg" });
-                //await AddProductAsync("Super Pan Supremo", 130, 100F, new List<string>() { "Comida Rapida", "Emparedados", "Carnes" }, new List<string>() { "span_supremo.jpeg" });
-                //await AddProductAsync("Sandwich de pollo con papas", 95, 100F, new List<string>() { "Emparedados", "Carnes" }, new List<string>() { "sandwichpp.jpeg" });
-                //await AddProductAsync("Sandwich de Jamon y Queso con papas", 90, 100F, new List<string>() { "Emparedados", "Carnes" }, new List<string>() { "sandwichjqp.jpeg" });
-                //await AddProductAsync("Club Sandwich con Papas", 90, 100F, new List<string>() { "Emparedados", "Carnes" }, new List<string>() { "csp.jpeg" });
-                //await AddProductAsync("Chicken Fingers", 155, 100F, new List<string>() { "Picante", "Pollo", "Carnes" }, new List<string>() { "chicken_finger.jpeg" });
-                //await AddProductAsync("Fajitas de Pollo en Salsa Jalapeña", 155, 100F, new List<string>() { "Picante", "Pollo", "Carnes" }, new List<string>() { "fpsj.jpg" });
-                //await AddProductAsync("Fajitas de Pollo en Asadas", 150, 100F, new List<string>() { "Asados", "Pollo", "Carnes" }, new List<string>() { "fpa.jpeg" });
-                //await AddProductAsync("Fajitas de Res en Salsa Jalapeña", 160, 100F, new List<string>() { "Picante", "Res", "Carnes" }, new List<string>() { "frsj.jpeg" });
-                //await AddProductAsync("Filete de Pollo Empanizado / A la plancha", 160, 100F, new List<string>() { "Pollo", "A la Plancha", "Carnes" }, new List<string>() { "fpep.jpeg" });
-                //await AddProductAsync("Bistek encebollado / Entomatado", 170, 100F, new List<string>() { "Res", "Carnes" }, new List<string>() { "bee.jpeg" });
-                //await AddProductAsync("Lomo de Res a la Plancha", 165, 100F, new List<string>() { "Res", "A la Plancha", "Carnes" }, new List<string>() { "bee.jpeg" });
-                //await AddProductAsync("Chuleta Asada", 140, 100F, new List<string>() { "Asados", "Carnes" }, new List<string>() { "chuleta_asada.jpeg" });
-                //await AddProductAsync("Milanesa de Pollo", 170, 100F, new List<string>() { "Pollo", "Carnes" }, new List<string>() { "milanesap.jpeg" });
+                await AddProductAsync("Bolibaleadas", 25, 100F, new List<string>() { "Tipico", "Economico" }, new List<string>() { "bolibaleadas.jpeg" });
+                await AddProductAsync("Hamburguesa de pollo", 160, 100F, new List<string>() { "Pollo", "Comida Rapida" }, new List<string>() { "hpollo.jpeg" });
+                await AddProductAsync("Hamburguesa con papas", 140, 100F, new List<string>() { "Carnes", "Comida Rapida" }, new List<string>() { "hpp.jpeg" });
+                await AddProductAsync("Hamburguesa doble carne", 170, 100F, new List<string>() { "Carnes", "Comida Rapida" }, new List<string>() { "hdc.jpeg" });
+                await AddProductAsync("Pan Sandwich", 120, 100F, new List<string>() { "Emparedados", "Carnes" }, new List<string>() { "pans.jpeg" });
+                
+                
+                await AddProductAsync("Super Pan Supremo", 130, 100F, new List<string>() { "Comida Rapida", "Emparedados", "Carnes" }, new List<string>() { "span_supremo.jpeg" });
+                await AddProductAsync("Sandwich de pollo con papas", 95, 100F, new List<string>() { "Emparedados", "Carnes" }, new List<string>() { "sandwichpp.jpeg" });
+                await AddProductAsync("Sandwich de Jamon y Queso con papas", 90, 100F, new List<string>() { "Emparedados", "Carnes" }, new List<string>() { "sandwichjqp.jpeg" });
+                await AddProductAsync("Club Sandwich con Papas", 90, 100F, new List<string>() { "Emparedados", "Carnes" }, new List<string>() { "csp.jpeg" });
+                await AddProductAsync("Chicken Fingers", 155, 100F, new List<string>() { "Picante", "Pollo", "Carnes" }, new List<string>() { "chicken_finger.jpg" });
+                await AddProductAsync("Fajitas de Pollo en Salsa Jalapeña", 150, 100F, new List<string>() { "Picante", "Pollo", "Carnes" }, new List<string>() { "fpsj.jpg" });
+                await AddProductAsync("Fajitas de Res en Salsa Jalapeña", 160, 100F, new List<string>() { "Picante", "Res", "Carnes" }, new List<string>() { "frsj.jpeg" });
+                await AddProductAsync("Fajitas de Pollo Asadas", 150, 100F, new List<string>() { "Asados", "Pollo", "Carnes" }, new List<string>() { "fpa.jpeg" });
+    
+                await AddProductAsync("Filete de Pollo Empanizado / A la plancha", 160, 100F, new List<string>() { "Pollo", "A la Plancha", "Carnes" }, new List<string>() { "fpep.jpeg" });
+                await AddProductAsync("Bistek encebollado / Entomatado", 170, 100F, new List<string>() { "Res", "Carnes" }, new List<string>() { "bee.jpeg" });
+                await AddProductAsync("Lomo de Res a la Plancha", 165, 100F, new List<string>() { "Res", "A la Plancha", "Carnes" }, new List<string>() { "lrp.jpeg" });
+                await AddProductAsync("Chuleta Asada", 140, 100F, new List<string>() { "Asados", "Carnes" }, new List<string>() { "chuleta_asada.jpeg" });
+                await AddProductAsync("Milanesa de Pollo", 170, 100F, new List<string>() { "Pollo", "Carnes" }, new List<string>() { "milanesap.jpeg" });
             }
         }
 
